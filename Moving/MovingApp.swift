@@ -13,7 +13,8 @@ struct MovingApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: Box.self)
         }
+     
+        
     }
 }

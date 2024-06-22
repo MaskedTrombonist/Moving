@@ -1,5 +1,5 @@
 //
-//  boxTest.swift
+//  itemTest.swift
 //  MovingTests
 //
 //  Created by Michelle Thorn on 6/22/24.
@@ -8,13 +8,13 @@
 import XCTest
 @testable import Moving
 
-class BoxTest: XCTestCase {
-    
+class itemTest: XCTestCase {
+
     var managedObjectContext: NSManagedObjectContext!
-    var boxManager: BoxManager!
-    var firstBox: Box!
+    var itemManager: ItemManager!
+    var firstItem: Item!
     
-    // setup and teardown create an Box that can be used in all tests
+    // setup and teardown create an item that can be used in all tests
     override func setUp(){
         super.setUp()
         let persistentContainer = NSPersistentContainer(name: "Model")
@@ -25,30 +25,29 @@ class BoxTest: XCTestCase {
         persistentContainer.loadPersistentStores { (description, error) in XCTAssertNil(error)}
         
         managedObjectContext = persistentContainer.viewContext
-        boxManager = BoxManager(context: managedObjectContext)
+        itemManager = ItemManager(context: managedObjectContext)
         
-        firstBox = boxManager.createBox(name: "first", code: 1, desc: "first box for testing")
+        firstItem = itemManager.createItem(name: "first", code: 1, desc: "first Item for testing")
     }
     
     override func tearDown() {
-        firstBox = nil
-        boxManager = nil
+        firstItem = nil
+        itemManager = nil
         managedObjectContext = nil
         super.tearDown()
     }
-    func testBoxNameShouldBeFirst() {
-        let result = firstBox.name
+    
+    func testItemNameShouldBeFirst() {
+        let result = firstItem.name
         XCTAssertEqual(result, "first")
     }
-    func testBoxCodeShouldBe1() {
-        let result = firstBox.code
+    func testItemCodeShouldBe1() {
+        let result = firstItem.code
         XCTAssertEqual(result, 1)
     }
-    func testBoxCodeShouldBeCreated() {
-        let result = firstBox.desc
-        XCTAssertEqual(result, "first box for testing")
+    func testItemCodeShouldBeCreated() {
+        let result = firstItem.desc
+        XCTAssertEqual(result, "first Item for testing")
     }
-    
 
 }
-
